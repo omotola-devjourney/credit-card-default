@@ -18,11 +18,25 @@ Predicts whether a customer will default next month using three classic ML model
 | Random Forest       | **0.813** | **0.422**        | **0.771** | **0.153** |
 | XGBoost             | **0.763** | **0.601**        | **0.773** | **0.282** |
 
-**Why the predicted-positive rates differ:** all three models use the default threshold of 0.5, but their score distributions are calibrated differently and we also applied imbalance handling (e.g., `class_weight` and `scale_pos_weight`). As a result, Logistic Regression flags ~38% as positive, XGBoost ~28%, and Random Forest ~15%. This is expected; if your cost of missing a defaulter is high, you’d lower the threshold to improve recall at the expense of more false positives.
+**Why the predicted-positive rates differ:** all three models use the default threshold of 0.5, but their score distributions are calibrated differently and we also applied imbalance handling (e.g., `class_weight`, `scale_pos_weight`). If the cost of missing a defaulter is high, lower the threshold to improve recall (expect more false positives).
 
-## How to run (locally)
+## How to run
+
+1. Create and activate a virtual environment  
+2. Install the dependencies  
+3. Open and run the notebook (or your scripts)
+
 ```bash
-python -m venv .venv && source .venv/bin/activate   # Windows: .venv\Scripts\activate
+# macOS / Linux
+python -m venv .venv
+source .venv/bin/activate
+
+# Windows (PowerShell)
+python -m venv .venv
+.venv\Scripts\Activate.ps1
+
 pip install -r requirements.txt
-# open and run the notebook (or your scripts)
+
+# then open the notebook
+jupyter notebook   # or: code .   (if you use VS Code)
 ```
